@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import br.com.alura.loja.dao.ProdutoDao;
 import br.com.alura.loja.modelo.Produto;
+import br.com.alura.loja.util.JPAUtil;
 
 public class CadastroDeProduto {
 
@@ -16,9 +18,9 @@ public class CadastroDeProduto {
 		celular.setDescricao("Top");
 		celular.setPreco(new BigDecimal("800"));
 		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("loja");
+		EntityManager em = JPAUtil.getEntityMaanger();
 		
-		EntityManager em = factory.createEntityManager();
+		ProdutoDao dao = new ProdutoDao(em);
 		
 		em.getTransaction().begin();
 		em.persist(celular);
